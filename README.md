@@ -7,7 +7,8 @@ Then we read back the written data record by record and check whether
 the written data is same as original data.
 
 
-```def _convert_toexample(im_path, im_arr, label):
+```
+def _convert_toexample(im_path, im_arr, label):
 
     im_shape = im_arr.shape
     im_bytes = im_arr.tobytes()
@@ -26,6 +27,32 @@ the written data is same as original data.
 Later on, we use `create_dataset` function to create our Dataset
 from the tfrecord file we wrote. The parsing of the records happens
 within `_parse_function` which we pass it to the map function of dataset.
+
+Parse function is as follows 
+
+```buildoutcfg
+
+def _parse_function(proto):
+
+    # define your tfrecord again. Remember that you saved your image as a string.
+
+    keys_to_features = {"im_path": tf.FixedLenSequenceFeature([], tf.string, allow_missing=True),
+                        "im_shape": tf.FixedLenSequenceFeature([], tf.int64, allow_missing=True),
+                        "im_arr": tf.FixedLenSequenceFeature([], tf.string, allow_missing=True),
+                        "label": tf.FixedLenSequenceFeature([], tf.int64, allow_missing=True),
+                        }
+
+    # Load one example
+    parsed_features = tf.parse_single_example(serialized=proto, features=keys_to_features)
+
+    parsed_features['im_arr'] = parsed_features['im_arr'][0]
+    parsed_features['label'] = parsed_features['label'][0]
+    parsed_features['im_arr'] = tf.decode_raw(parsed_features['im_arr'], tf.uint8)
+    parsed_features['im_arr'] = tf.reshape(parsed_features['im_arr'], parsed_features['im_shape'])
+
+    return parsed_features['im_arr'], parsed_features['label']
+
+```
 
 Finally, we pass the dataset to the model.fit in train_with_datasets.py.
 
