@@ -78,19 +78,19 @@ model.fit(
 Steps to run this project :
 
 1. First create a virtual environment using <br />
-    virtualenv env
+    `virtualenv env`
 
 2. Activate the environment <br />
-    source ./env/bin/activate
+    `source ./env/bin/activate`
 
 3. Install requirements <br />
-    pip3 install -r requirements.txt
+    `pip3 install -r requirements.txt`
 
 4. Create the tfrecords file and ensure their correctness. <br />
-    python3 src/tfrecords_utils.py
+    `python3 src/tfrecords_utils.py`
 
 5. Run the training <br />
-    python3 src/train_with_datasets.py
+    `python3 src/train_with_datasets.py`
 
 
 # Known Issues  
