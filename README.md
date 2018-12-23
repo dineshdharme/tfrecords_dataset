@@ -57,6 +57,23 @@ def _parse_function(proto):
 Finally, we pass the dataset to the model.fit in train_with_datasets.py.
 
 
+```buildoutcfg
+
+train_dataset  = create_dataset(train_paths)
+test_dataset  = create_dataset(test_paths)
+
+model.fit(
+        train_dataset.make_one_shot_iterator(),
+        steps_per_epoch=5,
+        epochs=10,
+        shuffle=True,
+        validation_data=test_dataset.make_one_shot_iterator(),
+        validation_steps=2,
+        verbose=1)
+
+```
+
+
 
 Steps to run this project :
 
