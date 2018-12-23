@@ -4,7 +4,7 @@
 In `write_read_check_tfrecords` function in tfrecords_utils.py file,
 we are writing the data to a tfrecords file.
 Then we read back the written data record by record and check whether
-the written data is same as original data.
+the written data is same as original data. Following is the conversion to Example record
 
 
 ```
