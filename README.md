@@ -19,18 +19,23 @@ Finally, we pass the dataset to the model.fit in train_with_datasets.py.
 Steps to run this project :
 
 1] First create a virtual environment using 
+
 virtualenv env
 
 2] Activate the environment
+
 source ./env/bin/activate
 
 3] Install requirements
+
 pip3 install -r requirements.txt
 
 4] Create the tfrecords file and ensure their correctness.
+
 python3 src/tfrecords_utils.py
 
 5] Run the training
+
 python3 src/train_with_datasets.py
 
 
