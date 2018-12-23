@@ -1,6 +1,6 @@
-**The main aim of this project is to be able to read tfrecords file 
+#**The main aim of this project is to be able to read tfrecords file 
 through tf.data.TFRecordDataset api and be able to pass it to
-model.fit function.**
+model.fit function.**#
 
 
 In `write_read_check_tfrecords` function in tfrecords_utils.py file,
