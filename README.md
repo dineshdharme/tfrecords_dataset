@@ -6,6 +6,23 @@ we are writing the data to a tfrecords file.
 Then we read back the written data record by record and check whether
 the written data is same as original data.
 
+
+```def _convert_toexample(im_path, im_arr, label):
+
+    im_shape = im_arr.shape
+    im_bytes = im_arr.tobytes()
+
+    example = tf.train.Example(features=tf.train.Features(feature={
+        'im_path': tf.train.Feature(bytes_list=tf.train.BytesList(value=[im_path.encode("utf-8")])),
+        'im_arr': tf.train.Feature(bytes_list=tf.train.BytesList(value=[im_bytes])),
+        'im_shape': tf.train.Feature(int64_list=tf.train.Int64List(value=im_shape)),
+        'label': tf.train.Feature(int64_list=tf.train.Int64List(value=[label])),
+
+    }))
+
+    return example
+```
+
 Later on, we use `create_dataset` function to create our Dataset
 from the tfrecord file we wrote. The parsing of the records happens
 within `_parse_function` which we pass it to the map function of dataset.
